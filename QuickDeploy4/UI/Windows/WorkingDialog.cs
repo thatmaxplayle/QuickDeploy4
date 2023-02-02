@@ -25,36 +25,50 @@ namespace QuickDeploy4.UI.Windows
 
         }
 
+        /// <summary>
+        /// Call this method to show the dialog, if you're running in a different thread. 
+        /// </summary>
+        /// <remarks>
+        /// This method merely calls <see cref="Show"/> but, invokes it first. 
+        /// </remarks>
         public void CrsThrdShow()
         {
             this.Invoke(() => this.Show());
         }
 
+        /// <summary>
+        /// Call this method to hide the dialog, if you're running in a different thread.
+        /// </summary>
+        /// <remarks>
+        /// This method merely calls <see cref="Hide"/> but, invokes it first.
+        /// </remarks>
         public void CrsThrdHide()
         {
             this.Invoke(() => this.Hide());
         }
+        
 
-        public async void TaskUpdate(string taskName)
+        /// <summary>
+        /// Update the displayed task information on the window. This method is cross-thread-compatible.
+        /// </summary>
+        public void TaskUpdate(string taskName)
         {
             if (this.InvokeRequired)
             {
-                this.Invoke(async () =>
+                this.Invoke(() =>
                 {
                     this.lblTaskName.Text = taskName;
-                    await Task.Delay(200);
                 });
             }
             else
             {
                 this.lblTaskName.Text = taskName;
-                await Task.Delay(200);
             }
         }
 
         private void progressBar1_Click(object sender, EventArgs e)
         {
-
+            //ignore this
         }
     }
 }
