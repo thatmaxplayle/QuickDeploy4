@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace QuickDeploy4.Data.Models
         public int Type { get; set; }
         public string ResourceName { get; set; }
 
-        public bool CheckPreconditions(out string error)
+        public bool CheckPreconditions(out string ?error)
         {
             var dt = GetDeploymentType();
             var parent = GetParent();
@@ -33,9 +34,41 @@ namespace QuickDeploy4.Data.Models
             DirectoryInfo source = new DirectoryInfo(parent.SourceDirectory);
             DirectoryInfo destination = new DirectoryInfo(parent.DestinationDirectory);
 
+            if (!source.Exists)
+            {
+                error = $"Source directory ({source.FullName}) does not exist.";
+                return false;
+            }
+
+            if (!destination.Exists)
+            {
+                error = $"Destination directory ({destination.FullName}) does not exist.";
+                return false;
+            }
+
             if (dt == EDeploymentType.Folder)
             {
-                
+                if (!source.GetDirectories().Any(x => x.Name.ToLower().Trim() == this.ResourceName.ToLower().Trim()))
+                {
+                    error = $"Directory \"{this.ResourceName}\" does not exist in source directory.";
+                    return false;
+                }
+            }
+            else if (dt == EDeploymentType.File)
+            {
+                if (!source.GetFiles().Any(x => x.Name.ToLower().Trim() == this.ResourceName.ToLower().Trim()))
+                {
+                    error = $"File \"{this.ResourceName}\" does not exist in source directory.";
+                    return false;
+                }
+            }
+            else if (dt == EDeploymentType.EnsureFile)
+            {
+                if (!File.Exists(this.ResourceName))
+                {
+                    error = $"Ensure file \"{this.ResourceName}\" cannot be found by the file system.";
+                    return false;
+                }
             }
 
             error = null;
