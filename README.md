@@ -13,7 +13,13 @@ I'm looking to re-create all functionality present in previous versions of Quick
 ## New features
 - Instead of serializing JSON/XML files for deployments, this time - I'm doing it using a database. 
   - There will be multiple database tables, one to hold the main deployment record, then multiple "child tables" (bound together using the main Deployment ID) which hold information such as file/folder records, and configuration.
- 
+
+
+## Contribution
+I'm down to contribute on this project, and if you feel as if you can contribute to the functionality of the tools, please do fork and create a feature branch.
+
+## Donation
+If you use QuickDeploy, and find it useful - please feel more than welcome to [buy me a coffee](https://buymeacoffee.com/maxplayle) or [donate on PayPal](https://paypal.me/thatmaxplayle)
  
 ## Architecture
 This application uses Windows Forms, due to the simplicity of the WinForms framework. This project will not be using any ultra-modern design spec, because
