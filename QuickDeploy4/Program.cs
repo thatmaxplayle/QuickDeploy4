@@ -39,22 +39,10 @@ namespace QuickDeploy4
 
                 DeploymentDataManager.Instance.LoadDeployments();
 
-            }).Start();
+            }) {  Name = "QD WORKER THREAD" } .Start();
 
 
             Application.Run(new QDMainForm());
-
-            new Thread(() => 
-            {
-                MessageBox.Show("hello world");
-                WorkingDialog.Instance.TaskUpdate("Hello world!");
-
-
-            })
-            {
-                IsBackground = true,
-                Name = "QD Worker Thread"
-            }.Start();
         }
     }
 }
