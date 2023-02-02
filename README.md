@@ -18,6 +18,15 @@ I'm looking to re-create all functionality present in previous versions of Quick
 ## Contribution
 I'm down to contribute on this project, and if you feel as if you can contribute to the functionality of the tools, please do fork and create a feature branch.
 
+## Download
+At this time, there are no pre-built binaries on offer due to the early stages of this rewrite. That said, if you want to download and build/test QuickDeploy, feel more than free. Here's some steps:
+
+- Download the code
+- Open the SLN file (Visual Studio Solution) - you'll need VS 2022 or later to open this
+- Hit Ctrl + B and MSBUILD will build it for you, no questions asked.
+
+The code contains no hardcoded locations or anything, so you're free to place the executable wherever you wish. Enjoy :) 
+
 ## Donation
 If you use QuickDeploy, and find it useful - please feel more than welcome to [buy me a coffee](https://buymeacoffee.com/maxplayle) or [donate on PayPal](https://paypal.me/thatmaxplayle)
  
